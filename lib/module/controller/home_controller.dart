@@ -6,6 +6,7 @@ import 'package:web_commander_code_test/constant/app_constants.dart';
 import '../model/movie_list_model.dart';
 
 class HomeController extends GetxController {
+  RxBool change = false.obs;
   var movieList = <MovieListModel>[].obs;
   RxBool isLoading1 = false.obs;
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:web_commander_code_test/module/controller/home_controller.dart';
 import 'package:web_commander_code_test/widget/big_text.dart';
 import 'package:web_commander_code_test/widget/small_text.dart';
 
@@ -18,6 +19,8 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+  HomeController home = Get.find<HomeController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,6 +123,78 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: Container(
+        height: Dimensions.bottomHeightBar,
+        padding: EdgeInsets.only(
+          top: Dimensions.height35,
+          bottom: Dimensions.height35,
+          left: Dimensions.width10,
+          right: Dimensions.width10,
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(Dimensions.radius20 * 2),
+            topRight: Radius.circular(Dimensions.radius20 * 2),
+          ),
+          color: AppColor.commonColor,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Obx(
+              () => Container(
+                padding: EdgeInsets.only(
+                    top: Dimensions.height10,
+                    bottom: Dimensions.height10,
+                    left: Dimensions.width20,
+                    right: Dimensions.width20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.radius20),
+                  color: AppColor.backgroundColor,
+                ),
+                child: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        home.change.value = !home.change.value;
+                      },
+                      child: Icon(
+                        Icons.favorite_outlined,
+                        size: 30,
+                        color:
+                            home.change.value ? AppColor.defWhite : Colors.pink,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Get.snackbar('Success', 'Added to wish list',
+                    backgroundColor: Colors.white,
+                    duration: const Duration(seconds: 1));
+              },
+              child: Container(
+                padding: EdgeInsets.only(
+                  top: Dimensions.height15,
+                  bottom: Dimensions.height15,
+                  left: Dimensions.width20,
+                  right: Dimensions.width20,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.radius20),
+                  color: AppColor.commonColor,
+                ),
+                child: BigText(
+                  text: "Add to watch list",
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
